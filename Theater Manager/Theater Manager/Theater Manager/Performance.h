@@ -1,4 +1,3 @@
-#include<string>
 #include <ctime>
 #include<vector>
 
@@ -19,11 +18,11 @@ public:
 	float getPerformance_cost () const;
 	
 	//Setters
-	void setPerformance_name();
-	void setPerformance_type();
-	void setAuthor_or_composer();
-	void setPerformance_cost();
-	void addPatron(string patron_name);
+	void setPerformance_name(string);
+	void setPerformance_type(string);
+	void setAuthor_or_composer(string);
+	void setPerformance_cost(string);
+	void addPatron(string);
 
 	
 private:
