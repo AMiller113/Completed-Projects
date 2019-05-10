@@ -72,7 +72,7 @@ public class Main {
         try {
             foodLogDatabase.CloseConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

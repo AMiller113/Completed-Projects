@@ -62,9 +62,8 @@ public class FoodLogDatabase {
 
     public synchronized void AddLog(){
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(add_log_command))
+        try (PreparedStatement preparedStatement = connection.prepareStatement(add_log_command); Scanner in = new Scanner(System.in))
         {
-            Scanner in = new Scanner(System.in);
             System.out.println("Please enter the following values separated by spaces (or 0 if you don't know).");
             System.out.println("Food_Name, Food_Group, Calories_Per_Serving, Number_of_Servings(will Default to 1)");
             String [] log = in.nextLine().split(" ");
@@ -110,9 +109,8 @@ public class FoodLogDatabase {
     }
 
     public synchronized void ChangeLog(){
-        try (PreparedStatement preparedStatement = connection.prepareStatement(change_log_command))
+        try (PreparedStatement preparedStatement = connection.prepareStatement(change_log_command); Scanner in = new Scanner(System.in))
         {
-            Scanner in = new Scanner(System.in);
             System.out.println("Enter the logs ID number");
             ShowAllLogs();
             String i = in.nextLine();
@@ -174,9 +172,8 @@ public class FoodLogDatabase {
 
     public synchronized void RemoveLog(){
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(delete_log_command))
+        try (PreparedStatement preparedStatement = connection.prepareStatement(delete_log_command) ; Scanner in = new Scanner(System.in))
         {
-            Scanner in = new Scanner(System.in);
             System.out.println("Enter the logs ID number that you wish to remove or 0 to go back to the main menu.");
             ShowAllLogs();
             String i = in.nextLine();
@@ -210,6 +207,7 @@ public class FoodLogDatabase {
     }
 
     public void ShowTodaysLog(){
+
         try(PreparedStatement preparedStatement = connection.prepareStatement(show_todays_log_command)){
             ResultSet resultSet = preparedStatement.executeQuery();
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
@@ -252,9 +250,8 @@ public class FoodLogDatabase {
     }
 
     public void GetLogFromDay(){
-        try(PreparedStatement preparedStatement = connection.prepareStatement(get_log_from_day_command)){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(get_log_from_day_command); Scanner in = new Scanner(System.in)){
 
-            Scanner in = new Scanner(System.in);
             System.out.println("Enter the date for the logs you wish to see in dd-MM-yyyy format");
             String day = in.nextLine();
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
