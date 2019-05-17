@@ -8,7 +8,7 @@ namespace BankAccountManager.Classes
 {
     class BusinessAccount : Account
     {
-        public string business_name { get; set; }
+        public string BusinessName { get; set; }
 
         public virtual ICollection<BusinessAccount> BusinessAccounts { get; set; }
     }

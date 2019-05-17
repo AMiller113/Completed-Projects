@@ -6,11 +6,27 @@
         xmlns:local="clr-namespace:BankAccountManager"
         mc:Ignorable="d"
         Title="Bank Account Manager" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="106" Height="36" RenderTransformOrigin="0.526,1.529"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="106" Height="34"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" Width="106" Height="34"/>
-        <TextBox HorizontalAlignment="Left" Height="27" Margin="10,25,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="188"/>
+    <Grid RenderTransformOrigin="0.593,0.528" Background="#FF467CF0">
+        <Button x:Name="Transfer" Content="Transfer Funds" HorizontalAlignment="Left" Margin="40,236,0,0" VerticalAlignment="Top" Width="100" Height="30" Click="Transfer_Click" RenderTransformOrigin="0.52,-0.17" Background="White"/>
+        <Button x:Name="Switch" Content="Switch Account" HorizontalAlignment="Left" Margin="40,288,0,0" VerticalAlignment="Top" Width="100" Height="30" Click="Switch_Click" Background="White"/>
+        <GridSplitter HorizontalAlignment="Left" Height="100" Margin="87,25,0,0" VerticalAlignment="Top" Width="1" Visibility="Hidden"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="183" Margin="252,125,0,0" VerticalAlignment="Top" Width="470" Background="#FF0712FF">
+            <TextBlock x:Name="UserOutput" TextWrapping="Wrap" Background="#FFFDFDFD" FontSize="16"/>
+        </ScrollViewer>
+        <Button x:Name="Withdraw" Content="Withdraw" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.079,0.583" Height="30" Background="White" Click="Withdraw_Click"/>
+        <Button x:Name="Deposit" Content="Deposit" HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.414,0.326" Height="30" Background="White" Click="Deposit_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="373,334,0,0" VerticalAlignment="Top" Width="200">
+            <Button x:Name="FindAccount" Content="Find Account" Background="White" Click="FindAccount_Click" Height="73" VerticalAlignment="Bottom" Margin="1,0,-1,-1"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="35" Margin="46,10,0,0" VerticalAlignment="Top" Width="700" OpacityMask="White">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBox TextWrapping="Wrap" Text="Welcome to your Bank Account Manager!" FontFamily="Times New Roman" FontSize="20" Background="White" Foreground="Black" IsEnabled="False"/>
+        </Border>
 
     </Grid>
 </Window>

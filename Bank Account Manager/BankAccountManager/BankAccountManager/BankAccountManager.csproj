@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,6 +64,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201905172149221_Unknown.cs" />
+    <Compile Include="Migrations\201905172149221_Unknown.Designer.cs">
+      <DependentUpon>201905172149221_Unknown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DepositWindow.xaml.cs">
+      <DependentUpon>DepositWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FindWindow.xaml.cs">
+      <DependentUpon>FindWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TransferWindow.xaml.cs">
+      <DependentUpon>TransferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WithdrawWindow.xaml.cs">
+      <DependentUpon>WithdrawWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +89,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\Account.cs" />
+    <Compile Include="Classes\AccountManagerContext.cs" />
+    <Compile Include="Classes\AccountManagerServices.cs" />
     <Compile Include="Classes\BusinessAccount.cs" />
     <Compile Include="Classes\CheckingAccount.cs" />
     <Compile Include="Classes\SavingsAccount.cs" />
@@ -78,8 +98,29 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\DepositWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FindWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TransferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WithdrawWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201905162328377_init.cs" />
+    <Compile Include="Migrations\201905162328377_init.Designer.cs">
+      <DependentUpon>201905162328377_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +134,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201905162328377_init.resx">
+      <DependentUpon>201905162328377_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905172149221_Unknown.resx">
+      <DependentUpon>201905172149221_Unknown.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -8,7 +8,7 @@ namespace BankAccountManager.Classes
 {
     class SavingsAccount : Account
     {
-        public int withdrawals_this_month { get; set; }
+        public int WithdrawalsThisMonth { get; set; }
 
         public virtual ICollection<SavingsAccount> SavingsAccounts{ get; set; }
     }

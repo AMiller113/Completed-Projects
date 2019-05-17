@@ -8,7 +8,7 @@ namespace BankAccountManager.Classes
 {
     class CheckingAccount : Account
     {
-        public int MonthlyTransferAmount { get; set; }
+        public float MonthlyTransferAmount { get; set; }
 
         public virtual ICollection<CheckingAccount> CheckingAccounts { get; set; }
     }
