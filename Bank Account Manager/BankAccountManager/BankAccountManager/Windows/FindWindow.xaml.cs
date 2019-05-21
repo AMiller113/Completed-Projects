@@ -22,32 +22,36 @@ namespace BankAccountManager.Windows
     {
         public FindWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
-        {
-            int pin;
-            string name, bankName, accountType;
-            Bank_Name bank;
-            AccountType type;
+        {                            
+            bool success = int.TryParse(PinInput.GetLineText(0),out int pin);
+            string name = HolderNameInput.GetLineText(0);
+            Bank_Name bank = AccountManagerServices.ParseBankName(BankNameInput.GetLineText(0));
+            AccountType type = AccountManagerServices.ParseAccountType(AccountTypeInput.GetLineText(0));
 
-            try
+            if (!success)
             {
-                pin = int.Parse(PinInput.GetLineText(0));
-                name = UserNameInput.GetLineText(0);
-                bankName = BankNameInput.GetLineText(0);
-                accountType = AccountTypeInput.GetLineText(0);
-                bank = AccountManagerServices.ParseBankName(bankName);
-                type = AccountManagerServices.ParseAccountType(accountType);
+                MessageBox.Show("Invalid Pin Number");
+                return;
             }
-            catch(Exception i)
+                                 
+            if (bank == 0)
             {
-                MessageBox.Show("There is an error in your submission");
+                MessageBox.Show("Invalid bank name (specific banks may not be supported)");
                 return;
             }
 
-            Account account = AccountManagerServices.FindAccount(pin,name,bank,type);
+            if (type == 0)
+            {
+                MessageBox.Show("Invalid account type.");
+                return;
+            }
+
+            Account account = AccountManagerServices.FindAccount(pin, name, bank, type);
 
             if (account == null)
             {
@@ -55,21 +59,28 @@ namespace BankAccountManager.Windows
                 return;
             }
 
-            MainWindow window = ((MainWindow)Application.Current.MainWindow);
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
-            window.UserOutput.Text = "Account Holder: " + account.AccountHolder + "\r\n"
-                + "Account Type: " + type.ToString() + "\r\n"
-                + "Current Balance: " + account.Balance + "\r\n"
-                + "Bank Name: " + account.BankName.ToString() + "\r\n";
+            if (mainWindow == null)
+            {
+                MainWindow window = new MainWindow(ref account);
+                AccountManagerServices.ShowAccountDetails(account, window);
+                window.Show();
+            }
+            else
+            {
+                AccountManagerServices.ShowAccountDetails(account, mainWindow);
+                mainWindow.Show();
+            }
 
             Close();
         }
+
+        
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e){}
+        }       
     }
 }

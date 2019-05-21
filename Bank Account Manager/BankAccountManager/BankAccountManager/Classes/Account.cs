@@ -10,13 +10,7 @@ using System.Configuration;
 
 namespace BankAccountManager.Classes
 {
-    [Flags]
-    public enum Bank_Name: short
-    {
-        Chase = 1, Capitol, BOA, HSBC, TD, Citi, Morgan, Goldman
-    }
-
-    abstract class Account
+   public abstract class Account
     {        
         [Key]
         [Column(Order = 1)]

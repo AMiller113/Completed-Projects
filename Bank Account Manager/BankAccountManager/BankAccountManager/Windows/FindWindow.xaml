@@ -13,15 +13,15 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="Confirm" Content="Confirm" HorizontalAlignment="Left" Margin="40,212,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Confirm_Click"/>
         <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="215,212,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.293,0.307" Grid.Column="1" Click="CancelButton_Click"/>
-        <TextBox x:Name="UserNameInput" HorizontalAlignment="Left" Height="23" Margin="132,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" Grid.Column="1"/>
+        <TextBox x:Name="HolderNameInput" HorizontalAlignment="Left" Height="23" Margin="132,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <TextBox x:Name="PinInput" HorizontalAlignment="Left" Height="23" Margin="132,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="57,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.241,0.318" Height="23" Width="75" Grid.Column="1" FontSize="10"><Run Text="Pin"/><LineBreak/><Run/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="57,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="22" Width="75" Grid.Column="1" FontSize="10"/>
+        <TextBlock HorizontalAlignment="Left" Margin="57,48,0,0" TextWrapping="Wrap" Text="Account Holder" VerticalAlignment="Top" Height="22" Width="75" Grid.Column="1" FontSize="10"/>
         <TextBox x:Name="BankNameInput" HorizontalAlignment="Left" Height="23" Margin="132,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="57,124,0,0" TextWrapping="Wrap" Text="Bank Name" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" FontSize="10"/>
         <TextBox x:Name="AccountTypeInput" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="132,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="57,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Height="22" FontSize="10"><Run Text="Account Type"/><LineBreak/><Run/></TextBlock>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="132,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Find Account"/><LineBreak/><Run/></TextBlock>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="132,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Get Account"/><LineBreak/><Run/></TextBlock>
 
     </Grid>
 </Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="BankAccountManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankAccountManager"
+        mc:Ignorable="d"
+        Title="Bank Account Manager" Height="450" Width="800" Background="#FF000BF5">
+    <Grid RenderTransformOrigin="0.593,0.528" Background="#FF467CF0">
+        <Button x:Name="Transfer" Content="Transfer Funds" HorizontalAlignment="Left" Margin="46,268,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Transfer_Click" RenderTransformOrigin="0.52,-0.17" Background="White"/>
+        <GridSplitter HorizontalAlignment="Left" Height="100" Margin="87,25,0,0" VerticalAlignment="Top" Width="1" Visibility="Hidden"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="183" Margin="252,125,0,0" VerticalAlignment="Top" Width="470" Background="#FF0712FF">
+            <TextBlock x:Name="UserOutput" TextWrapping="Wrap" Background="#FFFDFDFD" FontSize="16"/>
+        </ScrollViewer>
+        <Button x:Name="Withdraw" Content="Withdraw" HorizontalAlignment="Left" Margin="46,200,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.079,0.583" Height="40" Background="White" Click="Withdraw_Click"/>
+        <Button x:Name="Deposit" Content="Deposit" HorizontalAlignment="Left" Margin="46,125,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="-0.414,0.326" Height="40" Background="White" Click="Deposit_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="373,334,0,0" VerticalAlignment="Top" Width="200">
+            <Button x:Name="FindAccount" Content="Switch Account" Background="White" Click="FindAccount_Click" Height="73" VerticalAlignment="Bottom" Margin="1,0,-1,-1"/>
+        </Border>
+        <TextBlock HorizontalAlignment="Left" Margin="46,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="676" FontSize="20"><Run Text="Bank Account Manager "/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
+
+    </Grid>
+</Window>

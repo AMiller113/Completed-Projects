@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankAccountManager.Windows"
         mc:Ignorable="d"
-        Title="WithdrawWindow" Height="450" Width="800">
+        Title="WithdrawWindow" Height="225" Width="400">
     <Grid>
-        
+        <Grid Background="#FF2092F1">
+            <TextBox x:Name="WithdrawalSubmission" HorizontalAlignment="Left" Height="22" Margin="93,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="WithdrawalConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="93,143,0,0" VerticalAlignment="Top" Width="75" Click="WithdrawalConfirm_Click"/>
+            <TextBlock x:Name="DisplayMessage" HorizontalAlignment="Left" Margin="93,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Enter the amount you wish to wit"/><Run Text="hdraw"/><LineBreak/><Run/></TextBlock>
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="226,143,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.267,-0.75" Click="CancelButton_Click"/>
+
+        </Grid>
+
     </Grid>
 </Window>
