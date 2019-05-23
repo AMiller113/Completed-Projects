@@ -7,25 +7,43 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
+        /*
+        *
+        * Setup the Database for use by the main loop
+        *
+        * */
+
         FoodLogDatabase foodLogDatabase = null;
+
+        //Removed the stack traces for the deployed version as while using the if statement below to let the user know if the database fails to load
+
         try {
             foodLogDatabase = FoodLogDatabase.getInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
+        catch (IOException e) {}
+        catch (SQLException e) {}
+        catch (ClassNotFoundException e) {}
 
         if (foodLogDatabase == null){
-            System.err.println("DATABASE FAILED TO INITIALIZE, EXITING PROGRAM");
+            System.err.println("DATABASE FAILED TO INITIALIZE, EXITING PROGRAM. (Database.properties may be setup improperly)");
             System.exit(0);
         }
 
+        /*
+         *
+         * Setup fot the main loop (User input and exit clause)
+         *
+         * */
+
         boolean exit = false;
-        Scanner in = new Scanner(System.in);
         String command;
+
+        /*
+         *
+         * The Main loop itself
+         *
+         * */
 
         while(!exit){
 
@@ -38,6 +56,7 @@ public class Main {
                     "6) Get Logs From a certain Day\n"+
                     "7) Exit");
 
+            Scanner in = new Scanner(System.in);
             command = in.nextLine();
 
             switch (command){
@@ -61,6 +80,7 @@ public class Main {
                     break;
                 case("7"):
                    exit = true;
+                   in.close();
                    break;
                 default:
                    System.out.println("Invalid Command. Please Try Again");
@@ -68,9 +88,16 @@ public class Main {
            }
         }
 
+        /*
+         *
+         * Close resources
+         *
+         * */
+
         System.out.println("Take care, and stay healthy!");
         try {
             foodLogDatabase.CloseConnection();
+
         } catch (SQLException e) {
             //e.printStackTrace();
         }
