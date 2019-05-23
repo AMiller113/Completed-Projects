@@ -45,8 +45,11 @@ public class Main {
          *
          * */
 
+        Scanner in = new Scanner(System.in);
+
         while(!exit){
 
+            System.out.println();
             System.out.println("Welcome to your FoodLog! Enter the desired command using 1 through 6. \n" +
                     "1) Add Log\n" +
                     "2) Change a Log\n" +
@@ -56,36 +59,34 @@ public class Main {
                     "6) Get Logs From a certain Day\n"+
                     "7) Exit");
 
-            Scanner in = new Scanner(System.in);
-            command = in.nextLine();
+                command = in.nextLine();
 
-            switch (command){
-                case("1"):
-                   foodLogDatabase.AddLog();
-                   break;
-                case("2"):
-                   foodLogDatabase.ChangeLog();
-                   break;
-                case("3"):
-                   foodLogDatabase.RemoveLog();
-                   break;
-                case("4"):
-                   foodLogDatabase.ShowTodaysLog();
-                   break;
-                case("5"):
-                   foodLogDatabase.ShowAllLogs();
-                   break;
-                case("6"):
-                    foodLogDatabase.GetLogFromDay();
-                    break;
-                case("7"):
-                   exit = true;
-                   in.close();
-                   break;
-                default:
-                   System.out.println("Invalid Command. Please Try Again");
-                   break;
-           }
+                switch (command){
+                     case("1"):
+                         foodLogDatabase.AddLog();
+                         break;
+                     case("2"):
+                         foodLogDatabase.ChangeLog();
+                          break;
+                      case("3"):
+                         foodLogDatabase.RemoveLog();
+                        break;
+                     case("4"):
+                        foodLogDatabase.ShowTodaysLog();
+                        break;
+                     case("5"):
+                         foodLogDatabase.ShowAllLogs();
+                         break;
+                     case("6"):
+                          foodLogDatabase.GetLogFromDay();
+                          break;
+                    case("7"):
+                          exit = true;
+                          break;
+                     default:
+                         System.out.println("Invalid Command. Please Try Again");
+                         break;
+            }
         }
 
         /*

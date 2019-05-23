@@ -79,6 +79,7 @@ public class FoodLogDatabase {
             FileInputStream in = new FileInputStream("database.properties");
             Properties properties = new Properties();
             properties.load(in);
+            in.close();
             driver_name = (String) properties.get("DName");
             if (driver_name != null){
                 Class.forName(driver_name);
@@ -87,7 +88,7 @@ public class FoodLogDatabase {
             username = (String) properties.get("UName");
             password = (String) properties.get("PassW");
             connection = DriverManager.getConnection(url,username,password);
-            in.close();
+
     }
 
     /*
@@ -102,7 +103,6 @@ public class FoodLogDatabase {
         if (instance == null){
             instance = new FoodLogDatabase();
         }
-
         return instance;
     }
 
@@ -168,7 +168,7 @@ public class FoodLogDatabase {
             else{
                 System.err.println("Log failed, Apologies.");
             }
-            in.close();
+
         }
         catch (SQLException e) {
             return;
@@ -245,7 +245,7 @@ public class FoodLogDatabase {
                 System.err.println("Change failed, ID number may be incorrect.");
             }
 
-            in.close();
+
         }
         catch (SQLException e) {
             return;
@@ -269,12 +269,13 @@ public class FoodLogDatabase {
             int id = Integer.parseInt(i);
             if(id == 0){
                 System.out.println("Returning to main menu.");
+                return;
             }
 
             preparedStatement.setInt(1,id);
             int rowsAffected = preparedStatement.executeUpdate();
 
-            in.close();
+
 
             if(rowsAffected > 0){
                 System.out.println("The log was deleted successfully.");
@@ -364,8 +365,6 @@ public class FoodLogDatabase {
                 }
                 System.out.print("\n");
             }
-
-            in.close();
         }
         catch (SQLException e){
             return;
