@@ -95,11 +95,10 @@ public class Main {
          * */
 
         System.out.println("Take care, and stay healthy!");
+
         try {
             foodLogDatabase.CloseConnection();
-
-        } catch (SQLException e) {
-            //e.printStackTrace();
         }
+        catch (SQLException e) {}
     }
 }

@@ -87,6 +87,7 @@ public class FoodLogDatabase {
             username = (String) properties.get("UName");
             password = (String) properties.get("PassW");
             connection = DriverManager.getConnection(url,username,password);
+            in.close();
     }
 
     /*
@@ -227,7 +228,6 @@ public class FoodLogDatabase {
                 netCalories = Integer.parseInt(log[2]);
             }
 
-
             preparedStatement.setString(1,log[0]);
             preparedStatement.setString(2,log[1]);
             preparedStatement.setInt(3,Integer.parseInt(log[2]));
@@ -274,6 +274,8 @@ public class FoodLogDatabase {
             preparedStatement.setInt(1,id);
             int rowsAffected = preparedStatement.executeUpdate();
 
+            in.close();
+
             if(rowsAffected > 0){
                 System.out.println("The log was deleted successfully.");
                 return;
@@ -282,6 +284,8 @@ public class FoodLogDatabase {
                 System.err.println("Delete failed, Apologies.");
                 return;
             }
+
+
         }
         catch (SQLException e) {
             return;
@@ -312,12 +316,12 @@ public class FoodLogDatabase {
 
     public void ShowAllLogs(){
         try (PreparedStatement preparedStatement = connection.prepareStatement(show_all_logs_command)){
+
             ResultSet resultSet = preparedStatement.executeQuery();
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
             //Gets the number of columns for the purpose of iterating through the result set
             int numOfColumns = resultSetMetaData.getColumnCount();
-
 
             //Iterates through the result set/logs currently in the database and outputs it to the user using the format below
 
@@ -338,8 +342,9 @@ public class FoodLogDatabase {
 
     public void GetLogFromDay(){
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(get_log_from_day_command); Scanner in = new Scanner(System.in)){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(get_log_from_day_command) ){
 
+            Scanner in = new Scanner(System.in);
             System.out.println("Enter the date for the logs you wish to see in dd-MM-yyyy format");
             String day = in.nextLine();
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -360,6 +365,7 @@ public class FoodLogDatabase {
                 System.out.print("\n");
             }
 
+            in.close();
         }
         catch (SQLException e){
             return;
