@@ -1,23 +1,11 @@
 ﻿using BankAccountManager.Classes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BankAccountManager.Windows
 {
-    /// <summary>
-    /// Interaction logic for TransferWindow.xaml
-    /// </summary>
+
     public partial class TransferWindow : Window
     {
 
@@ -41,11 +29,15 @@ namespace BankAccountManager.Windows
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            //Gets the user input and parses it into a float while also performing integrity testing
+
             bool success_pin = int.TryParse(PinInput.GetLineText(0), out int pin);
             bool success_transferAmount = float.TryParse(TransferAmountInput.GetLineText(0), out float transferAmount);
             string name = HolderNameInput.GetLineText(0);
             Bank_Name bank = AccountManagerServices.ParseBankName(BankNameInput.GetLineText(0));
             AccountType type = AccountManagerServices.ParseAccountType(AccountTypeInput.GetLineText(0));
+
+            //Failure State actions
 
             if (!success_pin)
             {
@@ -74,6 +66,8 @@ namespace BankAccountManager.Windows
             }
 
             bool complete = AccountManagerServices.TransferMoney(account,receivingAccount, transferAmount);
+
+            //Gets a reference to the main window and updates the output
 
             if (complete)
             {

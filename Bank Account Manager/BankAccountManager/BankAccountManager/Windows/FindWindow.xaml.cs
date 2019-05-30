@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BankAccountManager.Classes;
 
 namespace BankAccountManager.Windows
 {
-    /// <summary>
-    /// Interaction logic for FindWindow.xaml
-    /// </summary>
+
+
     public partial class FindWindow : Window
     {
         public FindWindow()
@@ -27,12 +15,16 @@ namespace BankAccountManager.Windows
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
-        {                            
+        {
+            //Gets the user input and parses it into a float while also performing integrity testing
+
             bool success = int.TryParse(PinInput.GetLineText(0),out int pin);
             string name = HolderNameInput.GetLineText(0);
             Bank_Name bank = AccountManagerServices.ParseBankName(BankNameInput.GetLineText(0));
             AccountType type = AccountManagerServices.ParseAccountType(AccountTypeInput.GetLineText(0));
 
+            //Failure State actions
+            
             if (!success)
             {
                 MessageBox.Show("Invalid Pin Number");
@@ -58,6 +50,10 @@ namespace BankAccountManager.Windows
                 MessageBox.Show("Account not found");
                 return;
             }
+
+            //This window appears can appear before or after the main window 
+            //Thusly the Application class function may return null
+            //In that case a new instance of the main window will be created
 
             MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 

@@ -1,26 +1,17 @@
 ﻿using BankAccountManager.Classes;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BankAccountManager.Windows
 {
-    /// <summary>
-    /// Interaction logic for WithdrawWindow.xaml
-    /// </summary>
     public partial class WithdrawWindow : Window
     {
+        //The account that will have the widraw function called on it 
         Account account;
+
+
+        //The constructors are overloaded, The first is not in use currently. 
+        //I opted to use this method to pass the currently loaded account to the various windows.
 
         public WithdrawWindow()
         {
@@ -35,7 +26,10 @@ namespace BankAccountManager.Windows
          
         private void WithdrawalConfirm_Click(object sender, RoutedEventArgs e)
         {
+            //Gets the user input and parses it into a float while also performing integrity testing
+
             bool success = float.TryParse(WithdrawalSubmission.GetLineText(0), out float creditAmount);
+
             bool complete;
 
             if (success)
@@ -51,6 +45,9 @@ namespace BankAccountManager.Windows
             if (complete)
             {
                 MessageBox.Show("Transaction Completed. Your new balance is $" + account.Balance);
+
+                //Gets a reference to the main window and updates the output
+
                 MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 AccountManagerServices.ShowAccountDetails(account, mainWindow);
                 Close();

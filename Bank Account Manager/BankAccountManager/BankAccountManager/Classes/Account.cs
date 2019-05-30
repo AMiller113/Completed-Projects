@@ -1,17 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Configuration;
 
 namespace BankAccountManager.Classes
 {
-   public abstract class Account
-    {        
+    /*
+     * 
+     * Abstract Account class used to hold common traits of all the concrete account entities
+     * 
+     */
+
+    public abstract class Account
+    {    
+
+        /*
+         * 
+         * Composite Key of the Pin,Account Holder, and Bank Name.
+         * The idea is to not allow one person to have two accounts of the same type at the same bank.
+         * 
+         */
+
         [Key]
         [Column(Order = 1)]
         public int PinNumber { get; set; }

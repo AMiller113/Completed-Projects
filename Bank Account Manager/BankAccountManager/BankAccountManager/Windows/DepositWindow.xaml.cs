@@ -35,6 +35,8 @@ namespace BankAccountManager.Windows
 
         private void DepositConfirm_Click(object sender, RoutedEventArgs e)
         {
+            //Gets the user input and parses it into a float while also performing integrity testing
+
             bool success = float.TryParse(DepositSubmission.GetLineText(0), out float creditAmount);
             bool complete;
 
@@ -51,6 +53,9 @@ namespace BankAccountManager.Windows
             if (complete)
             {
                 MessageBox.Show("Transaction Completed. Your new balance is $"+ account.Balance);
+
+                //Gets a reference to the main window in order to update the output
+
                 MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 AccountManagerServices.ShowAccountDetails(account, mainWindow);
                 Close();

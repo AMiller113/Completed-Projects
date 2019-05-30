@@ -1,25 +1,13 @@
 ﻿using BankAccountManager.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BankAccountManager.Windows;
 
 namespace BankAccountManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    //The main window hosts the User output window as well as being a hub to all the functions of the application
+    //This window is actually created after the find window initially as
+    //Displaying this window without a loaded account wouldnt be logical
+
     public partial class MainWindow : Window
     {
         Account account;

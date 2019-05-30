@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace BankAccountManager.Classes
 {
+    //Concrete Class inheriting from the Account class, used as a Entity/Table in the database
+
     class SavingsAccount : Account
     {
         public int WithdrawalsThisMonth { get; set; }

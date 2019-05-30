@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace BankAccountManager.Classes
 {
+    //Enum Definitions, declared them in namsepace scope for the benefit of the Account classes having access to them. 
+    //Since they are used here extensively I opted to define them in this file rather than the account class
+
     [Flags]
     public enum Bank_Name : short { Chase = 1, Capitol, BOA, HSBC, TD, Citi, Morgan, Goldman }
+    //The Account type enum is purely for function operation use. It is not apart of the data modeling scheme
     [Flags]
     enum AccountType : short {Checking = 1, Savings, Business};
+   
+    //Opted to make the class static since I had no intention of having an object of this class be utilized at any time
 
-    
-    
      static class AccountManagerServices
     {
-        const float max_transfer = 100000f; //Maximum transfer at one time
+        const float max_transfer = 100000f; //Maximum transfer at one time.
 
         public static bool DebitAccount(Account account, float debitAmount)
         {
@@ -27,8 +28,11 @@ namespace BankAccountManager.Classes
                 return false;
             }
 
+            //Attempt to make changes to the account balance itself thread safe.
+
             Mutex mutex = new Mutex();
             mutex.WaitOne();
+
             //Critical Section - Begin
             bool balanceChanged = false;
             using (var context = new AccountManagerContext())
@@ -38,7 +42,8 @@ namespace BankAccountManager.Classes
                 context.SaveChanges();
             }
             balanceChanged = true;
-            //Critical Section - End          
+            //Critical Section - End    
+            
             mutex.ReleaseMutex();
             return balanceChanged;
         }
@@ -51,8 +56,11 @@ namespace BankAccountManager.Classes
                 return false;
             }
 
+            //Attempt to make changes to the account balance itself thread safe.
+
             Mutex mutex = new Mutex();
             mutex.WaitOne();
+
             //Critical Section - Begin
             bool balanceChanged = false;
             using (var context = new AccountManagerContext())
@@ -63,6 +71,7 @@ namespace BankAccountManager.Classes
             }
             balanceChanged = true;
             //Critical Section - End
+
             mutex.ReleaseMutex();
             return balanceChanged;
         }
@@ -74,6 +83,8 @@ namespace BankAccountManager.Classes
                 MessageBox.Show("Amount exceeds maximum single transaction limit.");
                 return false;
             }
+
+            //Attempt to make changes to the account balance itself thread safe.
 
             Mutex mutex = new Mutex();
             mutex.WaitOne();
@@ -107,7 +118,15 @@ namespace BankAccountManager.Classes
             return true;
         }
 
-       public static bool CreateAccount(int pin, float monthlyTransfer, String name, Bank_Name bank)
+        /*
+         * 
+         * Overloaded functions for creating accounts 
+         * These methods were just for quick testing, a user creating a bank account from an application would be strange from a real world perspective
+         * 
+         */
+        
+
+        public static bool CreateAccount(int pin, float monthlyTransfer, String name, Bank_Name bank)
        {
             Mutex mutex = new Mutex();
             mutex.WaitOne();
@@ -141,7 +160,8 @@ namespace BankAccountManager.Classes
             return true;
         }
 
-       public static bool CreateAccount(int pin, String name, Bank_Name bank)
+
+        public static bool CreateAccount(int pin, String name, Bank_Name bank)
         {
             Mutex mutex = new Mutex();
             mutex.WaitOne();
@@ -175,7 +195,7 @@ namespace BankAccountManager.Classes
             return true;
         }
 
-       public static bool CreateAccount(int pin, String name, String businessName,Bank_Name bank)
+        public static bool CreateAccount(int pin, String name, String businessName,Bank_Name bank)
         {
             Mutex mutex = new Mutex();
             mutex.WaitOne();
@@ -209,6 +229,9 @@ namespace BankAccountManager.Classes
             return true;
         }
 
+        //Function for fishing a row out of the database 
+        //Takes in the neccesary data to perform a linq query 
+
        public static Account FindAccount(int pin, String name, Bank_Name bank, AccountType type)
         {
             using (var context = new AccountManagerContext())
@@ -232,7 +255,11 @@ namespace BankAccountManager.Classes
                 return account;
             }
         }
-   
+
+        //Since storing an Enum is less costly than storing a varchar, 
+        //so I decided to just have Enum conversion operations rather than storing than bank name with every row,
+        //may decide otherwise in the future.
+
         public static Bank_Name ParseBankName(string bankName)
         {
             bankName = bankName.Trim();
@@ -306,6 +333,8 @@ namespace BankAccountManager.Classes
             return bankName;
         }
 
+        //Made to parse user input in the various windows
+
         public static AccountType ParseAccountType(string type)
         {
             type = type.Trim();
@@ -322,6 +351,9 @@ namespace BankAccountManager.Classes
 
             return account;
         }
+
+        // Displays the account information for the passed in account on the main window
+
         public static void ShowAccountDetails(Account account, MainWindow window)
         {
             AccountType accountType;

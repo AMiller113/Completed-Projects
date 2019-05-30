@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BankAccountManager.Classes
 {
+    //Concrete Class inheriting from the Account class, used as a Entity/Table in the database
+
     class BusinessAccount : Account
     {
         public string BusinessName { get; set; }
