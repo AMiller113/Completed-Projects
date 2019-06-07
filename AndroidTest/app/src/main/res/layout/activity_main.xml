@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gpc_background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingTop="0dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="0dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="24dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:onClick="onChatClicked"
+            android:paddingTop="22dp"
+            android:paddingBottom="23dp"
+            android:text="@string/chat_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:onClick="onLoginClicked"
+            android:paddingTop="22dp"
+            android:paddingBottom="23dp"
+            android:text="@string/login_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="left|center_vertical"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:onClick="onAnimationClicked"
+            android:paddingTop="22dp"
+            android:paddingBottom="23dp"
+            android:text="@string/animation_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
