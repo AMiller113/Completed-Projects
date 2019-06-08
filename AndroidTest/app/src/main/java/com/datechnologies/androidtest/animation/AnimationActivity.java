@@ -3,16 +3,16 @@ package com.datechnologies.androidtest.animation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
 import com.datechnologies.androidtest.MainActivity;
 import com.datechnologies.androidtest.R;
@@ -97,7 +97,7 @@ public class AnimationActivity extends AppCompatActivity {
             Runnable runnable  = new Runnable() {
                 @Override
                 public void run() {
-                    FadeIn();
+                    FadeInAndOut();
                 }
             };
             Handler handler = new Handler();
@@ -105,19 +105,27 @@ public class AnimationActivity extends AppCompatActivity {
         }
     };
 
-    private void FadeIn() {
+    private void FadeInAndOut() {
 
         imageView = findViewById(R.id.DaImage);
 
-        for(int i = imageView.getImageAlpha() ; i >= 0; i--){
-            imageView.setImageAlpha(i);
-        }
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator());
+        fadeOut.setDuration(1000);
 
-        /*Thread.sleep(500);
+        fadeOut.setAnimationListener(new Animation.AnimationListener()
+        {
+            public void onAnimationEnd(Animation animation)
+            {
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                fadeIn.setInterpolator(new AccelerateInterpolator());
+                fadeIn.setDuration(1000);
+                imageView.startAnimation(fadeIn);
+            }
+            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationStart(Animation animation) {}
+        });
 
-        for(int i = imageView.getImageAlpha(); i <= 255; i++){
-            imageView.setImageAlpha(i);
-            Thread.sleep(fade_delay);
-        }*/
+        imageView.startAnimation(fadeOut);
     }
 }
