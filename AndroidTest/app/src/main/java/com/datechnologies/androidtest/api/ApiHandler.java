@@ -3,13 +3,14 @@ package com.datechnologies.androidtest.api;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Timer;
 
 import org.json.JSONObject;
-
-import android.content.Context;
 import android.util.Log;
 
 public class ApiHandler {
@@ -20,21 +21,16 @@ public class ApiHandler {
 
     public void PostWebData(String email, String password){
         try{
-            String parameters = email+"=data1&"+password+"=data2";
-            byte[] postData = parameters.getBytes( StandardCharsets.UTF_8 );
-            int postDataLength = postData.length;
             url = new URL( test_url );
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
-            connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("charset", "utf-8");
-            connection.setRequestProperty("Content-Length", Integer.toString(postDataLength ));
-            connection.setUseCaches(false);
-            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
-            outputStream.write( postData );
-            outputStream.close();
+            PrintWriter postData = new PrintWriter(connection.getOutputStream());
+            postData.write("email="+ URLEncoder.encode(email,"UTF-8")+"&");
+            postData.write("password="+URLEncoder.encode(password,"UTF-8"));
+            postData.close();
+
         }
         catch (Exception e){
             e.printStackTrace();
@@ -42,7 +38,7 @@ public class ApiHandler {
 
     }
 
-    public JSONObject GetWebData(){
+    public JSONObject RetrieveWebData(){
 
         if (url == null||connection == null)
             return null;
@@ -52,12 +48,14 @@ public class ApiHandler {
             StringBuffer json = new StringBuffer();
             String line;
 
-            while((line = reader.readLine()) !=null)
+            while((line = reader.readLine()) !=null){
                 json.append(line);
+            }
 
             reader.close();
 
             JSONObject jsonObject = new JSONObject(json.toString());
+            Log.d("jsonText", json.toString());
             System.out.print(json.toString());
             return jsonObject;
         }
@@ -65,5 +63,4 @@ public class ApiHandler {
             return null;
         }
     }
-
 }

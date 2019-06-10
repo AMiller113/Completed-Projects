@@ -3,16 +3,20 @@ package com.datechnologies.androidtest.animation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.datechnologies.androidtest.MainActivity;
 import com.datechnologies.androidtest.R;
@@ -25,8 +29,11 @@ import com.datechnologies.androidtest.R;
 public class AnimationActivity extends AppCompatActivity {
 
     private static final int fade_delay = 100;
-    ImageView imageView;
-    Button fade_in_button;
+    private ImageView imageView;
+    private ViewGroup relative_layout;
+    private Button fade_in_button;
+    private int x;
+    private int y;
 
     //==============================================================================================
     // Class Properties
@@ -52,13 +59,18 @@ public class AnimationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animation);
 
         ActionBar actionBar = getSupportActionBar();
-
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
         fade_in_button = findViewById(R.id.FadeInButton);
         fade_in_button.setOnClickListener(fade_in_listener);
+
+        relative_layout = findViewById(R.id.RelativeLayout);
+
+        imageView = findViewById(R.id.DaImage);
+        imageView.setOnTouchListener(new MoveListener());
+
 
         // TODO: Make the UI look like it does in the mock-up. Allow for horizontal screen rotation.
         // TODO: Add a ripple effect when the buttons are clicked
@@ -127,5 +139,37 @@ public class AnimationActivity extends AppCompatActivity {
         });
 
         imageView.startAnimation(fadeOut);
+    }
+
+    private final class MoveListener implements View.OnTouchListener {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            final int eventRawX = (int)event.getRawX();
+            final int eventRawY = (int)event.getRawY();
+            switch(event.getActionMasked()){
+                case MotionEvent.ACTION_DOWN:
+                    RelativeLayout.LayoutParams layoutP = (RelativeLayout.LayoutParams) v.getLayoutParams();
+                    x = eventRawX - layoutP.leftMargin;
+                    y = eventRawY - layoutP.topMargin;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) v.getLayoutParams();
+                    layoutParams.leftMargin = eventRawX - x;
+                    layoutParams.topMargin = eventRawY - y;
+                    layoutParams.rightMargin = -250;
+                    layoutParams.bottomMargin = -250;
+                    v.setLayoutParams(layoutParams);
+                    break;
+            }
+            relative_layout.invalidate();
+            return true;
+        }
     }
 }

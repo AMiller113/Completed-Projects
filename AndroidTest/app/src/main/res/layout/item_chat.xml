@@ -8,7 +8,7 @@
     android:layout_marginRight="21dp"
     android:background="?android:selectableItemBackground"
     android:clickable="true"
-    android:gravity="center_vertical"
+    android:gravity="center|center_vertical"
     android:orientation="horizontal"
     tools:background="@color/background"
     tools:ignore="UseCompoundDrawables">
@@ -17,6 +17,7 @@
         android:id="@+id/avatarImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
         android:layout_marginRight="8dp"
         android:src="@drawable/ic_avatar_placeholder"
         tools:ignore="RtlHardcoded" />
@@ -26,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:textColor="@color/chat_text"
