@@ -14,10 +14,12 @@ public class Account implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private float account_balance;
 	private final Date account_opened_date;
+	private final String account_number;
 	
-	public Account(float initialBalance,Date accountOpenedDate){
+	public Account(float initialBalance,Date accountOpenedDate,String accountNumber){
 		this.account_balance = initialBalance;
 		this.account_opened_date = accountOpenedDate;
+		this.account_number = accountNumber;
 	}	
 	
 	public float getAccount_balance(){ return account_balance; }
@@ -89,10 +91,10 @@ class SingleAccount extends Account{
 	
 	public String getAccount_holder(){ return account_holder; }
 	
-	public SingleAccount(String accountHolder,float initialBalance,Date accountOpenedDate){
-		super(initialBalance,accountOpenedDate);
+	public SingleAccount(String accountHolder,String accountNumber,float initialBalance,Date accountOpenedDate){
+		super(initialBalance,accountOpenedDate,accountNumber);
 		this.account_holder = accountHolder;
-	}	
+	}
 }
 
 class JointAccount extends Account{
@@ -102,8 +104,8 @@ class JointAccount extends Account{
 	private static final long serialVersionUID = 1L;
 	private final List<String> account_holders;
 	
-	public JointAccount(List<String> accountHolders,float initialBalance,Date accountOpenedDate){
-		super(initialBalance,accountOpenedDate);
+	public JointAccount(List<String> accountHolders,String accountNumber,float initialBalance,Date accountOpenedDate){
+		super(initialBalance,accountOpenedDate,accountNumber);
 		this.account_holders = accountHolders;
 	}
 	
