@@ -10,7 +10,7 @@ namespace HotelManager
     {
         private static RoomData[] rooms = new RoomData[8];
         private List<Reservation> reservations;
-        private const string file_path = "Hotel Data.bin";
+        private const string file_path = "Hotel_Data.dat";
         private static HotelDatabase database;
 
         private HotelDatabase()
@@ -34,13 +34,16 @@ namespace HotelManager
                 return database;
             }
 
-            if (File.Exists(file_path) && database == null)
+            if (File.Exists(file_path))
             {
                 database = LoadDB();
                 return database;
             }
             else
-                return new HotelDatabase();
+            {
+                database = new HotelDatabase();
+                return database;
+            }
         }
 
         public void AddReservation(Reservation reservation)
@@ -77,11 +80,12 @@ namespace HotelManager
             {
                 using (FileStream file = new FileStream(file_path, FileMode.Open))
                 {
+                    file.Position = 0;
                     BinaryFormatter binaryFormatter = new BinaryFormatter();
                     data = (HotelDatabase)binaryFormatter.Deserialize(file);
                 }
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 Console.WriteLine("The Database has failed to load, data may be corrupted, loading database defaults");
                 Console.WriteLine(e.StackTrace);

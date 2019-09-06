@@ -32,7 +32,7 @@ namespace HotelManager
                 (
                 "Name: " + name + "\r\n" +
                 "Room Type: " + room.ToString() + "\r\n" +
-                "Date of Arrival: " + date.ToString() + "\r\n" +
+                "Date of Arrival: " + date.Date.ToString() + "\r\n" +
                 "Days Staying: " + daysStaying + "\r\n" +
                 "Total Cost: " + (int)room * daysStaying + "\r\n"
                 );
@@ -69,7 +69,7 @@ namespace HotelManager
 
         private static DateTime GetDate()
         {
-            Console.WriteLine("Enter the date of your arrival (yyyy-dd-mm)");
+            Console.WriteLine("Enter the date of your arrival (yyyy-mm-dd)");
             string date = Console.ReadLine();
             if (date.Equals("") || date == null)
             {
