@@ -11,7 +11,7 @@ namespace HotelManager
     [Serializable]
     class HotelDatabase
     {
-        private RoomData[] rooms = new RoomData[8];
+        private static RoomData[] rooms = new RoomData[8];
         private List<Reservation> reservations;
         private const string file_path = "Hotel Data.bin";
         private const string log_path = "Reservation Log.txt";
@@ -27,6 +27,8 @@ namespace HotelManager
             rooms[5] = new RoomData(RoomType.Suite, 8);
             rooms[6] = new RoomData(RoomType.Penthouse, 3);
             rooms[7] = new RoomData(RoomType.Presidential, 1);
+
+            reservations = new List<Reservation>();
         }
 
         public static HotelDatabase GetDatabase()
@@ -43,6 +45,15 @@ namespace HotelManager
             }
             else
                 return new HotelDatabase();
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+            if (reservation!=null)
+            {
+                reservations.Add(reservation);
+                SaveDB();
+            }
         }
 
         public static void SaveDB()
@@ -103,46 +114,31 @@ namespace HotelManager
                 room = roomType;
                 Number_Of_Rooms = numOfRooms;
             }
+
+            public RoomType getRoom()
+            {
+                return room;
+            }
         }
 
         public static RoomType ParseRoomType(int roomType)
         {
             if (roomType == 0 || roomType < 0 || roomType > 8)
             {
-                throw new IlegalDataException();
+                throw new IllegalDataException();
             }
-
-            switch (roomType)
+            if (rooms[roomType].Number_Of_Rooms > 0)
             {
-                case 1:
-                    return RoomType.Single;
-
-                case 2:
-                    return RoomType.Twin;
-
-                case 3:
-                    return RoomType.Studio;
-
-                case 4:
-                    return RoomType.Joint;
-
-                case 5:
-                    return RoomType.Deluxe;
-
-                case 6:
-                    return RoomType.Suite;
-
-                case 7:
-                    return RoomType.Penthouse;
-
-                case 8:
-                    return RoomType.Presidential;
-
-                default:
-                    throw new IlegalDataException();
+                rooms[roomType].Number_Of_Rooms--;
+                return rooms[roomType].getRoom();
+            }
+            else
+            {
+                Console.WriteLine("There are no more rooms of that type available, please choose another upon restart.");
+                throw new IllegalDataException();
             }
         }
 
-        public class IlegalDataException : Exception {}
+        public class IllegalDataException : Exception {}
     }
 }
