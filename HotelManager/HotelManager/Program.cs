@@ -16,11 +16,10 @@ namespace HotelManager
                 DateTime date = GetDate();
                 int daysStaying = GetDays();
                 ConfirmSubmission(hotelDatabase, room, name, date, daysStaying);
-
             }
             catch (Exception)
             {
-                Console.WriteLine("There is an error in your submission. Please restart."); 
+                Console.WriteLine("An error has occurred. Please restart."); 
             }
 
             Console.Read();
@@ -74,10 +73,10 @@ namespace HotelManager
             string date = Console.ReadLine();
             if (date.Equals("") || date == null)
             {
-
+                throw new IllegalDataException();
             }
-            string[] dateParts = date.Split('-');
-            bool result = DateTime.TryParse(date + " 12:00:00 AM", out DateTime arrivalDate);
+           
+            bool result = DateTime.TryParse(date + " 12:00:00AM", out DateTime arrivalDate);
             if (result)
             {
                 if (arrivalDate >= DateTime.Now)

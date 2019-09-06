@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -14,7 +11,6 @@ namespace HotelManager
         private static RoomData[] rooms = new RoomData[8];
         private List<Reservation> reservations;
         private const string file_path = "Hotel Data.bin";
-        private const string log_path = "Reservation Log.txt";
         private static HotelDatabase database;
 
         private HotelDatabase()
@@ -63,7 +59,7 @@ namespace HotelManager
                 using (FileStream stream = File.OpenWrite(file_path))
                 {
                     BinaryFormatter binary = new BinaryFormatter();
-                    binary.Serialize(stream, binary);
+                    binary.Serialize(stream, database);
                 }
             }
             catch (IOException e)
