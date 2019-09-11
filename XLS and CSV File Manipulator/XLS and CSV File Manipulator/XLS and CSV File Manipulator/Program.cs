@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XLS_and_CSV_File_Manipulator
 {
@@ -10,10 +6,9 @@ namespace XLS_and_CSV_File_Manipulator
     {
         static void Main(string[] args)
         {
-            string[,] vs = new string[5, 6];
-
-            Console.Write(vs.Length);
-
+            
+            CSV_Manager csv = new CSV_Manager(@"C: \Users\A.Miller\Downloads\Beginner's Guide to Python Data Analysis & Visualization\Beginner's Guide to Python Data Analysis & Visualization\[Tutsgalaxy.com] - Beginner's Guide to Python Data Analysis & Visualization\Data\AAPL.csv");           
+            csv.PrintCSV();                      
             Console.Read();
         }
     }
