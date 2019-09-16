@@ -26,7 +26,7 @@ namespace XLS_and_CSV_File_Manipulator
             text.SetDelimiters(",");
             column_names = text.ReadFields();
             this.columns = column_names.Length;
-            Task<List<string[]>> dataHold =  GetColumnRowDataAsync(text);
+            Task<List<string[]>> dataHold =  GetColumnRowDataAsync(text);         
             this.rows = dataHold.Result.Count;
             this.data = new string[rows, columns];
             PopulateData(dataHold.Result);
